@@ -15,7 +15,6 @@
                         <ul class="list-unstyled" id="messages">
                             <li class="d-flex justify-content-between mb-4">
                                 <div class="text-center">
-                                    <small>Bot</small>
                                     <h5>Hi there! How can I help you?</h5>
                                 </div>
                             </li>
@@ -41,25 +40,3 @@
 </body>
 </html>
 
-
-<input type="text" class="form-control" id="message-input" placeholder="Type your message here...">
-<form id="chat-form">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script>
-        $(function() {
-            // Handle form submission
-            $('#chat-form').submit(function(event) {
-                event.preventDefault();  // Prevent default form submission behavior
-                var messageInput = $('#message-input');  // Get the message input field
-                var message = messageInput.val();  // Get the message text
-                messageInput.val('');  // Clear the message input field
-                // Send an HTTP POST request to the Flask server with the message data
-                $.post('/result', {query: message}, function(response) {
-                    // Update the chat messages with the bot's response
-                    $('#messages').append('<li class="d-flex justify-content-between mb-4"><div class="text-center"><small>Bot</small><h5>' + response + '</h5></div></li>');
-                });
-            });
-        });
-    </script>
-    
