@@ -43,7 +43,27 @@ vectorstore = Chroma("langchain_store", embeddings)
 index_name = "langchain_store"
 docsearch = Chroma.from_texts([t.page_content for t in texts], embeddings, index_name=index_name)
 
-# # Create OpenAI instance and load question answering chain from langchain
+# Create OpenAI instance and load question answering chain from langchain
 llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
 chain = load_qa_chain(llm, chain_type="stuff")
 
+
+# Define the Flask application
+app = Flask(__name__)
+
+# Define a route for the homepage
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# Define a route to handle the form submission
+@app.route('/result', methods=['POST'])
+def result():
+    query = request.form['query']
+    # Use the original script to retrieve information from the PDF files based on the query
+    # You can modify this code to suit your specific needs and use case
+    response = chain.ask(query, docsearch, vectorstore, num_answers=1)
+    return render_template('result.html', query=query, response=response)
+
+if __name__ == '__main__':
+    app.run(debug=True)
