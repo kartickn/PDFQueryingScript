@@ -48,22 +48,27 @@ llm = OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY)
 chain = load_qa_chain(llm, chain_type="stuff")
 
 
-# Define the Flask application
+# Initialize the Flask application
 app = Flask(__name__)
 
-# Define a route for the homepage
+# Define the homepage route
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Define a route to handle the form submission
+# Define the route for processing the form data and displaying the results
 @app.route('/result', methods=['POST'])
 def result():
+    # Get the query from the form data
     query = request.form['query']
-    # Use the original script to retrieve information from the PDF files based on the query
-    # You can modify this code to suit your specific needs and use case
-    response = chain.ask(query, docsearch, vectorstore, num_answers=1)
+    
+    # Replace the following line with your own code to process the query
+    response = "You searched for: " + query
+    
+    # Render the results page with the query and response data
     return render_template('result.html', query=query, response=response)
 
+# Start the Flask application
 if __name__ == '__main__':
     app.run(debug=True)
+

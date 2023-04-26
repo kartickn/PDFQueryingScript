@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Chatbot Results</title>
-</head>
-<body>
-    <h1>Chatbot Results</h1>
-    {% if answer %}
-        <p>The answer to your question is: {{ answer }}</p>
-    {% else %}
-        <p>No answer found. Please try a different question.</p>
-    {% endif %}
-    <a href="/">Back to Chatbot</a>
-</body>
+  <head>
+    <title>Results Page</title>
+  </head>
+  <body>
+    <h1>Results for "{{ query }}"</h1>
+    <p>{{ response }}</p>
+  </body>
 </html>
